@@ -55,26 +55,26 @@ namespace RentalMovies
             return result;
         }
 
-        private double amountFor(Rental each)
+        private double amountFor(Rental rental)
         {
-            double thisAmount = 0;
-            switch (each.Movie.PriceCode)
+            double result = 0;
+            switch (rental.Movie.PriceCode)
             {
                 case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.DaysRented > 2)
-                        thisAmount += (each.DaysRented - 2) * 1.5;
+                    result += 2;
+                    if (rental.DaysRented > 2)
+                        result += (rental.DaysRented - 2) * 1.5;
                     break;
                 case Movie.NEW_RELEASE:
-                    thisAmount += each.DaysRented * 3;
+                    result += rental.DaysRented * 3;
                     break;
                 case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-                    if (each.DaysRented > 3)
-                        thisAmount += (each.DaysRented - 3) * 1.5;
+                    result += 1.5;
+                    if (rental.DaysRented > 3)
+                        result += (rental.DaysRented - 3) * 1.5;
                     break;
             }
-            return thisAmount;
+            return result;
         }
     } 
 }
