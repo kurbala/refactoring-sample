@@ -27,12 +27,9 @@ namespace RentalMovies
 
         public string statement()
         {
-            int frequentRenterPoints = 0;
             string result = "Учет аренды для " + _name + "\n";
             foreach (var each in _rentals)
             {
-                frequentRenterPoints += each.GetFrequentRenterPoints();
-
                 // Показать результаты для этой аренды
                 result += "\t" + each.Movie.Title + "\t" +
                     each.GetCharge().ToString() + "\n";
@@ -40,8 +37,18 @@ namespace RentalMovies
             // Добавить нижний колонтитул
             result += "Сумма задолженности составляет " +
                 GetTotalCharge().ToString() + "\n";
-            result += "Вы заработали " + frequentRenterPoints.ToString() +
+            result += "Вы заработали " + GetTotalFrequentRenterPoints().ToString() +
                 " очков за активность";
+            return result;
+        }
+
+        private int GetTotalFrequentRenterPoints()
+        {
+            int result = 0;
+            foreach (var each in _rentals)
+            {
+                result += each.GetFrequentRenterPoints();
+            };
             return result;
         }
 
