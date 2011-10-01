@@ -38,6 +38,16 @@ namespace RentalMovies
             return result;
         }
 
+        public int GetFrequentRenterPoints()
+        {
+            // Бонус за аренду новинки на два дня
+            if ((Movie.PriceCode == Movie.NEW_RELEASE) &&
+                DaysRented > 1)
+                return 2;
+            else
+                return 1;
+        }
+
         public int DaysRented
         {
             get { return _daysRented; }

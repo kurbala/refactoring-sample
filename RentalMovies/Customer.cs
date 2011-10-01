@@ -32,11 +32,7 @@ namespace RentalMovies
             string result = "Учет аренды для " + _name + "\n";
             foreach (var each in _rentals)
             {
-                // Добавить очки для активного арендатора
-                frequentRenterPoints++;
-                // Бонус за аренду новинки на два дня
-                if ((each.Movie.PriceCode == Movie.NEW_RELEASE) &&
-                    each.DaysRented > 1) frequentRenterPoints++;
+                frequentRenterPoints += each.GetFrequentRenterPoints();
 
                 // Показать результаты для этой аренды
                 result += "\t" + each.Movie.Title + "\t" +
