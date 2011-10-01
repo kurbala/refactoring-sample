@@ -32,10 +32,6 @@ namespace RentalMovies
             string result = "Учет аренды для " + _name + "\n";
             foreach (var each in _rentals)
             {
-                double thisAmount = 0;
-
-                thisAmount = each.GetCharge();
-                
                 // Добавить очки для активного арендатора
                 frequentRenterPoints++;
                 // Бонус за аренду новинки на два дня
@@ -44,8 +40,8 @@ namespace RentalMovies
 
                 // Показать результаты для этой аренды
                 result += "\t" + each.Movie.Title + "\t" +
-                    thisAmount.ToString() + "\n";
-                totalAmount += thisAmount;
+                    each.GetCharge().ToString() + "\n";
+                totalAmount += each.GetCharge();
             }
             // Добавить нижний колонтитул
             result += "Сумма задолженности составляет " +
