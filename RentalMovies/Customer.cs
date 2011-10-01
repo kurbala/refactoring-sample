@@ -34,7 +34,7 @@ namespace RentalMovies
             {
                 double thisAmount = 0;
 
-                thisAmount = amountFor(each);
+                thisAmount = each.GetCharge();
                 
                 // Добавить очки для активного арендатора
                 frequentRenterPoints++;
@@ -53,11 +53,6 @@ namespace RentalMovies
             result += "Вы заработали " + frequentRenterPoints.ToString() +
                 " очков за активность";
             return result;
-        }
-
-        private double amountFor(Rental rental)
-        {
-            return rental.GetCharge();
         }
     } 
 }
