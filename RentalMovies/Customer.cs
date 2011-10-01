@@ -42,6 +42,25 @@ namespace RentalMovies
             return result;
         }
 
+        public string htmlStatement()
+        {
+            string result = "<H1>Операции аренды для <EM>" + _name +
+                "</EM></H1><P>\n";
+            foreach (var rental in _rentals)
+            {
+                // Показать результаты по каждой аренде
+                result += rental.Movie.Title + ":" +
+                    rental.GetCharge().ToString() + "<BR>\n";
+            }
+            // Добавить нижний колонтитул
+            result += "<P>Ваша задолженность составляет <EM>" +
+                GetTotalCharge().ToString() + "</EM><P>\n";
+            result += "На этой аренде вы заработали <EM>" + 
+                GetTotalFrequentRenterPoints().ToString() +
+                "</EM> очков за активность<P>";
+            return result;
+        }
+
         private int GetTotalFrequentRenterPoints()
         {
             int result = 0;
