@@ -34,23 +34,7 @@ namespace RentalMovies
             {
                 double thisAmount = 0;
 
-                // Определить сумму для каждой строки
-                switch (each.Movie.PriceCode)
-                {
-                    case Movie.REGULAR:
-                        thisAmount += 2;
-                        if (each.DaysRented > 2)
-                            thisAmount += (each.DaysRented - 2) * 1.5;
-                        break;
-                    case Movie.NEW_RELEASE:
-                        thisAmount += each.DaysRented * 3;
-                        break;
-                    case Movie.CHILDRENS:
-                        thisAmount += 1.5;
-                        if (each.DaysRented > 3)
-                            thisAmount += (each.DaysRented - 3) * 1.5;
-                        break;
-                }
+                thisAmount = amountFor(each);
                 
                 // Добавить очки для активного арендатора
                 frequentRenterPoints++;
@@ -69,6 +53,28 @@ namespace RentalMovies
             result += "Вы заработали " + frequentRenterPoints.ToString() +
                 " очков за активность";
             return result;
+        }
+
+        private double amountFor(Rental each)
+        {
+            double thisAmount = 0;
+            switch (each.Movie.PriceCode)
+            {
+                case Movie.REGULAR:
+                    thisAmount += 2;
+                    if (each.DaysRented > 2)
+                        thisAmount += (each.DaysRented - 2) * 1.5;
+                    break;
+                case Movie.NEW_RELEASE:
+                    thisAmount += each.DaysRented * 3;
+                    break;
+                case Movie.CHILDRENS:
+                    thisAmount += 1.5;
+                    if (each.DaysRented > 3)
+                        thisAmount += (each.DaysRented - 3) * 1.5;
+                    break;
+            }
+            return thisAmount;
         }
     } 
 }
