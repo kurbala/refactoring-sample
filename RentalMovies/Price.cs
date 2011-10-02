@@ -11,13 +11,8 @@ namespace RentalMovies
 
         public abstract double GetCharge(int daysRented);
 
-        public int GetFrequentRenterPoints(int daysRented)
+        public virtual int GetFrequentRenterPoints(int daysRented)
         {
-            // Бонус за аренду новинки на два дня
-            if ((GetPriceCode() == Movie.NEW_RELEASE) &&
-               daysRented > 1)
-                return 2;
-            else
                 return 1;
         }
 
