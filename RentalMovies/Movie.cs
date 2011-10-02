@@ -12,18 +12,37 @@ namespace RentalMovies
         public const int NEW_RELEASE = 1;
 
         private string _title;
-        private int _priceCode;
+        private Price _price;
 
         public Movie(string title, int priceCode)
         {
             _title = title;
-            _priceCode = priceCode;
+            PriceCode = priceCode;
         }
 
         public int PriceCode 
         {
-            get { return _priceCode; }
-            set { _priceCode = value; }
+            get 
+            { 
+                return _price.GetPriceCode(); 
+            }
+            set 
+            {
+                switch (value)
+                {
+                    case REGULAR:
+                        _price = new RegularPrice();
+                        break;
+                    case CHILDRENS:
+                        _price = new ChildrensPrice();
+                        break;
+                    case NEW_RELEASE:
+                        _price = new NewReleasePrice();
+                        break;
+                    default:
+                        throw new ArgumentException("Incorrect Price Code");
+                }
+            }
         }
 
         public string Title
@@ -34,7 +53,7 @@ namespace RentalMovies
         public double GetCharge(int daysRented)
         {
             double result = 0;
-            switch (_priceCode)
+            switch (PriceCode)
             {
                 case Movie.REGULAR:
                     result += 2;
@@ -56,8 +75,8 @@ namespace RentalMovies
         public int GetFrequentRenterPoints(int daysRented)
         {
             // Бонус за аренду новинки на два дня
-            if ((_priceCode == Movie.NEW_RELEASE) &&
-                daysRented > 1)
+            if ((PriceCode == Movie.NEW_RELEASE) &&
+               daysRented > 1)
                 return 2;
             else
                 return 1;
