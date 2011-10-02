@@ -57,12 +57,7 @@ namespace RentalMovies
 
         public int GetFrequentRenterPoints(int daysRented)
         {
-            // Бонус за аренду новинки на два дня
-            if ((PriceCode == Movie.NEW_RELEASE) &&
-               daysRented > 1)
-                return 2;
-            else
-                return 1;
+            return _price.GetFrequentRenterPoints(daysRented);
         }
 
 
